@@ -1,5 +1,6 @@
 # ijim_research_2026
 
+0. (리소스) 기존 코드 및 rawdata 링크
 - 모든 rawdata 링크: https://drive.google.com/drive/folders/1HDO3ByxGIljWx_pHzOnX6G0xyjdteq4z?usp=sharing
 - 논문 원문 작성 및 분석을 위한 모든 기존 리소스(코드, .RData파일 등) 링크: https://drive.google.com/drive/folders/19dZFSwOHzrneZcukS-UZl0HK_A1rRHYi?usp=sharing
 
