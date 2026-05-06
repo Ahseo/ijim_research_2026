@@ -1,8 +1,10 @@
 # ijim_research_2026
 
-0. (리소스) 기존 코드 및 rawdata 링크
+0. (리소스) 기존 코드 및 rawdata링크, 논문 원문 및 리뷰어 코멘트 파일 위치
 - 모든 rawdata 링크: https://drive.google.com/drive/folders/1HDO3ByxGIljWx_pHzOnX6G0xyjdteq4z?usp=sharing
 - 논문 원문 작성 및 분석을 위한 모든 기존 리소스(코드, .RData파일 등) 링크: https://drive.google.com/drive/folders/19dZFSwOHzrneZcukS-UZl0HK_A1rRHYi?usp=sharing
+- 논문 원문: Manuscript 폴더 내 Algorithmic task assignment_manuscript_final.docx 파일
+- 리뷰어 코멘트 원문: Review 폴더 내 review.docx 파일
 
 1. (사전 준비) 논문 원문의 결과 재현
 - previous_resource 폴더의 ISR_submitted ver_data.RData 파일의 data_day_matched1, data_shift_matched1을 직접 로드하여 사용하면 논문 원문 내 테이블의 모든 coefficient와
