@@ -1,0 +1,362 @@
+{
+  "title": "IJIM JJIM-D-25-02826 Major Revision Package",
+  "description": "Address all reviewer comments (R1, R2, AE) for the manuscript 'Does AI Benefit All Platform Stakeholders?' and produce a complete revision package: response letter + revised manuscript + supporting analyses. Submission deadline 2026-05-30. All originals (manuscript.docx, review.docx, raw csv, RData) must be preserved untouched. All deliverables go to new folders.",
+  "context": {
+    "rootDir": "/Users/gujaeseo/Documents/projects/yeonseo/ijim_research_2026",
+    "originalManuscript": "Manuscript/Algorithmic task assignment_manuscript_final.docx",
+    "originalReview": "Review/review.docx",
+    "rdataPath": "previous_resource/ISR_submitted ver_data.RData",
+    "rdataKeyObjects": [
+      "data_day_matched1",
+      "data_shift_matched1",
+      "data_order",
+      "matched_data1",
+      "psmatch1",
+      "proficiency"
+    ],
+    "extendedDataPath": "data/raw/recommendation_data_busan_exclusive_dec_feb.csv",
+    "doNotModify": [
+      "Manuscript/Algorithmic task assignment_manuscript_final.docx",
+      "Review/review.docx",
+      "previous_resource/**",
+      "data/raw/**"
+    ],
+    "outputDirs": {
+      "tables": "output/tables/",
+      "figures": "output/figures/",
+      "interpretations": "output/interpretation/",
+      "manuscriptRevised": "manuscript_revised/",
+      "responseLetter": "response/",
+      "docs": "docs/"
+    },
+    "verifiedManuscriptSpec": {
+      "outcome": "LINEAR (NOT log-transformed)",
+      "did_formula": "y ~ After:Treat | rider_id + station_date | 0 | rider_id",
+      "ddd_formula": "y ~ After:Treat:prof_low + After:Treat:prof_med + After:Treat:prof_high + After:prof_med + After:prof_high | rider_id + station_date | 0 | rider_id",
+      "shift_level_FE_addition": "+ hourDOW",
+      "T7_extra_control": "+ avg_dist",
+      "cluster": "rider_id (NOT riderDOW)",
+      "buffer_filter": "NONE — use full 14,102 day rows / 153,190 shift rows",
+      "verification": "code/04_manuscript_exact_spec.R reproduces all manuscript Table 4-7 coefficients to 3-4 decimal places"
+    },
+    "verifiedHeadlineNumbers": {
+      "T4_DID": "+0.1406 *** (≈3.0% of mean 4.69 orders/hour)",
+      "T4_DDD_low": "+0.0884 NS",
+      "T4_DDD_med": "+0.2493 *** (≈5.4% relative)",
+      "T4_DDD_high": "+0.0671 NS",
+      "T7_single_DID": "-0.1843 ** min (single-order delivery)",
+      "T7_overall_DID": "-0.0254 NS"
+    }
+  },
+  "stories": [
+    {
+      "id": "US-001",
+      "title": "Manuscript Table 4-7 정확 재현 (완료)",
+      "priority": 1,
+      "passes": true,
+      "description": "RData baseline 으로 Table 4-7 의 모든 manuscript 계수 정확 일치 검증. 핵심: spec이 02_DID matching.R 의 ln() spec과 다르고, LINEAR + rider_id cluster + no buffer filter.",
+      "acceptanceCriteria": [
+        "✅ code/04_manuscript_exact_spec.R 단독 실행 가능",
+        "✅ T4 DID = 0.1406 (manuscript 0.141)",
+        "✅ T4 DDD med = 0.2493*** (manuscript 0.249***)",
+        "✅ T5 idle DDD low +0.566**, med -0.583** 정확 일치",
+        "✅ T7 single DID = -0.184** 정확 일치",
+        "✅ output/tables/04_manuscript_exact_log.txt 저장",
+        "✅ docs/03_evidence_log.md 에 verified 수치 + spec 정리"
+      ]
+    },
+    {
+      "id": "US-002",
+      "title": "Event-study (dynamic DID with leads/lags)",
+      "priority": 2,
+      "passes": true,
+      "description": "Reviewer 1 #3A + R2 #7 address. AI rollout (2020-10-26) 기준 week-level lead/lag 회귀로 pre-trend 검증 + dynamic effect 추정. 데이터의 wb5/wb4/.../w5 dummies 사용 가능.",
+      "acceptanceCriteria": [
+        "code/05_event_study.R 단독 실행 가능",
+        "Outcome: orders_per_hour (LINEAR), avg_waiting (single only)",
+        "Spec: y ~ Treat:wb4 + Treat:wb3 + Treat:wb2 + Treat:w1 + Treat:w2 + ... + Treat:w5 | rider_id + station_date | 0 | rider_id (wb1 omitted as reference)",
+        "Pre-trend F-test 결과 보고 (joint test of wb4, wb3, wb2 = 0)",
+        "output/figures/05_event_study_productivity.png — coefficient plot with 95% CI",
+        "output/tables/05_event_study_coefficients.csv",
+        "output/interpretation/05_event_study.md 에 (i) pre-trend, (ii) post-AI dynamics, (iii) 그룹별 패턴 정리"
+      ]
+    },
+    {
+      "id": "US-003",
+      "title": "Oster (2019) bound on unobservable selection",
+      "priority": 3,
+      "passes": true,
+      "description": "R1 #3C + R2 #8 + AE-4 address. Oster delta* 로 unobservable confounders 가 결과를 뒤집기 위해 필요한 selection 강도 정량화.",
+      "acceptanceCriteria": [
+        "code/06_oster_bounds.R 단독 실행 가능",
+        "Main DID spec (orders_per_hour ~ After:Treat) 에 대해 Oster delta* 계산",
+        "robomit 또는 직접 implementation 사용",
+        "|delta*| > 1 이면 robust (rule of thumb)",
+        "output/tables/06_oster_bounds.csv 생성",
+        "output/interpretation/06_oster_bounds.md 에 결과 + reviewer address 정리"
+      ]
+    },
+    {
+      "id": "US-004",
+      "title": "Dose-response on AI adoption intensity (supplementary)",
+      "priority": 4,
+      "passes": true,
+      "description": "R1 #3B address. Ever-adopter binary 보완. AI assignment intensity (share_aiorder, daily share_aiorders) 연속변수 회귀.",
+      "acceptanceCriteria": [
+        "code/07_dose_response.R 단독 실행 가능",
+        "Rider-day 단위 share_aiorder 정의 (코드 주석)",
+        "Productivity 에 대한 dose-response 회귀 (linear + binscatter)",
+        "output/figures/07_dose_response.png",
+        "output/tables/07_dose_response.csv",
+        "output/interpretation/07_dose_response.md 에 supplementary 명시"
+      ]
+    },
+    {
+      "id": "US-005",
+      "title": "Stable workers robustness",
+      "priority": 5,
+      "passes": true,
+      "description": "R1 #3C + R2 #8 address. 양 기간 active rider 만 retain.",
+      "acceptanceCriteria": [
+        "code/08_stable_workers.R 단독 실행 가능",
+        "Stability rule (예: 양 기간 ≥7 working days) 코드 주석에 명시",
+        "Restricted sample size 보고",
+        "Main DID + DDD 결과가 stable sample 에서도 일관성 있는지 비교",
+        "output/tables/08_stable_workers.csv",
+        "output/interpretation/08_stable_workers.md"
+      ]
+    },
+    {
+      "id": "US-006",
+      "title": "Inequality metrics (Gini, Theil, P90/P10)",
+      "priority": 6,
+      "passes": true,
+      "description": "R1 Minor #2 address. Subgroup DDD 외에 직접 inequality metric.",
+      "acceptanceCriteria": [
+        "code/09_inequality.R 단독 실행 가능",
+        "Pre vs post 두 기간에 대해 productivity 분포의 Gini, Theil, P90/P10 계산",
+        "output/figures/09_inequality_density.png (사전·사후 density plot)",
+        "output/tables/09_inequality.csv",
+        "output/interpretation/09_inequality.md"
+      ]
+    },
+    {
+      "id": "US-007",
+      "title": "Learning dynamics (week-level treatment evolution)",
+      "priority": 7,
+      "passes": true,
+      "description": "R2 #9 address. 'Learning curve' empirical evidence. Week-level treatment coefficient 진화 (그룹별).",
+      "acceptanceCriteria": [
+        "code/10_learning_dynamics.R 단독 실행 가능",
+        "Post-AI w1, w2, w3, w4, w5 에 대해 그룹별 (low/med/high) coefficient 추정",
+        "output/figures/10_learning_curves_by_group.png",
+        "output/tables/10_learning_dynamics.csv",
+        "output/interpretation/10_learning_dynamics.md 에 결과 + 1개월 한계 명시"
+      ]
+    },
+    {
+      "id": "US-008",
+      "title": "Worker–customer linkage",
+      "priority": 8,
+      "passes": true,
+      "description": "AE #2 address. Stack-level worker productivity ↔ customer waiting time 의 연결. formal mediation 회피.",
+      "acceptanceCriteria": [
+        "code/11_worker_customer_linkage.R 단독 실행 가능",
+        "Stack-level: avg_waiting ~ num_orders (productivity proxy) + controls | rider + station_date + hourDOW",
+        "Interpretation 에 'linkage' 단어 사용, 'mediation' 회피",
+        "output/figures/11_worker_customer_linkage.png",
+        "output/tables/11_worker_customer_linkage.csv",
+        "output/interpretation/11_worker_customer_linkage.md (matched sample only 명시)"
+      ]
+    },
+    {
+      "id": "US-009",
+      "title": "Submission diagnostics (representativeness + MDE)",
+      "priority": 9,
+      "passes": true,
+      "description": "R2 #6 + R1 #4 address. Analytic sample 의 대표성 + design-based MDE.",
+      "acceptanceCriteria": [
+        "code/12_submission_diagnostics.R 단독 실행 가능",
+        "Analytic full sample (336 매칭 라이더) vs all active Busan 라이더 (data_order의 584 라이더 또는 더 큰 비교군) 의 4가지 변수 (orders/hour, daily orders, labor hours, fee) 비교",
+        "Density plot: output/figures/12_sample_representativeness.png",
+        "Productivity MDE (design-based, alpha=0.05, power=0.8) 보고",
+        "output/tables/12_submission_diagnostics.csv",
+        "output/interpretation/12_submission_diagnostics.md"
+      ]
+    },
+    {
+      "id": "US-010",
+      "title": "Long-term extension (Dec-Feb 데이터 통합)",
+      "priority": 10,
+      "passes": true,
+      "description": "AE #4 + R2 #7 address. data/raw/recommendation_data_busan_exclusive_dec_feb.csv 통합한 extended event-study.",
+      "acceptanceCriteria": [
+        "code/13_long_term_extension.R 단독 실행 가능",
+        "Dec-Feb csv 와 main RData 의 schema 호환성 검증 + mapping 코드 주석",
+        "통합 데이터셋의 sample size, 관찰 기간 보고",
+        "Extended event-study 추정 (post-AI 3+개월)",
+        "1-month vs extended sample coefficient 비교 표",
+        "output/figures/13_long_term_event_study.png",
+        "output/tables/13_long_term_coefficients.csv",
+        "output/interpretation/13_long_term_extension.md"
+      ]
+    },
+    {
+      "id": "US-011",
+      "title": "Manuscript revision draft (Section 1: Introduction)",
+      "priority": 11,
+      "passes": true,
+      "description": "R1-1, R1-2, R2-1, R2-2 address. Sharper novelty + AI vs algorithmic dispatch + tone-down + customer-side 병렬.",
+      "acceptanceCriteria": [
+        "manuscript_revised/section_1_introduction.md 작성",
+        "Multi-stage task structure (assignment → stacking → sequencing → routing) 가 boundary condition 으로 명시",
+        "AI 시스템 정의 (revealed preference learning, dynamic match scoring) 명확화",
+        "Worker stress / algorithmic bias 가능성 언급",
+        "Customer-side question 이 worker-side 와 병렬 배치",
+        "manuscript_revised/changelog.md 업데이트 (변경 이유 + 매핑된 reviewer 코멘트 ID)"
+      ]
+    },
+    {
+      "id": "US-012",
+      "title": "Manuscript revision draft (Section 2: Related Literature)",
+      "priority": 12,
+      "passes": true,
+      "description": "R2-4, R2-5, R1-Minor-1 address.",
+      "acceptanceCriteria": [
+        "manuscript_revised/section_2_related_literature.md 작성",
+        "Competing views (AI raises vs reduces inequality) 비판적 검토",
+        "Platform-specific 인용 (Knight 2024, Y. Chen 2024, M. Liu 2021, Mao 2025, Gupta 2022) 강조",
+        "Y. Chen et al. (2024a/b) 중복 단일화",
+        "manuscript_revised/changelog.md 업데이트"
+      ]
+    },
+    {
+      "id": "US-013",
+      "title": "Manuscript revision draft (Section 3: Background)",
+      "priority": 13,
+      "passes": true,
+      "description": "R1-2, AE-3 address.",
+      "acceptanceCriteria": [
+        "manuscript_revised/section_3_background.md 작성",
+        "AI 시스템의 (i) revealed preference learning, (ii) dynamic match scoring, (iii) automated assignment 명시 + manual broadcast 와 차별화",
+        "AE-3: '사회적 형평이 시스템 설계 목표 아니었음' 명시",
+        "manuscript_revised/changelog.md 업데이트"
+      ]
+    },
+    {
+      "id": "US-014",
+      "title": "Manuscript revision draft (Section 4: Empirical Models)",
+      "priority": 14,
+      "passes": true,
+      "description": "R1-Minor-3, R1-3 address.",
+      "acceptanceCriteria": [
+        "manuscript_revised/section_4_empirical_models.md 작성",
+        "FE 와 clustering level 명시 (rider_id + station_date, cluster rider_id)",
+        "Event-study 회귀식 (leads/lags) 명시",
+        "Dose-response spec (supplementary) 명시",
+        "manuscript_revised/changelog.md 업데이트"
+      ]
+    },
+    {
+      "id": "US-015",
+      "title": "Manuscript revision draft (Section 5: Results)",
+      "priority": 15,
+      "passes": true,
+      "description": "R1-Minor-2, R1-4, AE-2, R2-6,7,8,9 address.",
+      "acceptanceCriteria": [
+        "manuscript_revised/section_5_results.md 작성",
+        "5.1: 기존 + Gini/Theil/P90-P10 inequality metric 본문 포함",
+        "5.2: 'customers served by treated/matched riders' 로 estimand 한정 + worker-customer linkage 결과 (mediation 단어 회피)",
+        "5.3: Event-study + Oster + stable workers + extended long-term + representativeness 모두 포함",
+        "Skill → proficiency 통일",
+        "manuscript_revised/changelog.md 업데이트"
+      ]
+    },
+    {
+      "id": "US-016",
+      "title": "Manuscript revision draft (Section 6: Discussion + Section 7: Conclusion)",
+      "priority": 16,
+      "passes": true,
+      "description": "R2-3, R2-10, R2-11 address.",
+      "acceptanceCriteria": [
+        "manuscript_revised/section_6_discussion.md 작성",
+        "manuscript_revised/section_7_conclusion.md 신설",
+        "Section 7 4개 sub-section: theoretical contribution, practical implication, limitation, future research",
+        "Limitation: single country / single platform / single task / short window / residual selection 명시",
+        "manuscript_revised/changelog.md 업데이트"
+      ]
+    },
+    {
+      "id": "US-017",
+      "title": "Skill → Proficiency 일괄 교체 + Claims-to-avoid 점검",
+      "priority": 17,
+      "passes": true,
+      "description": "AE-1 address + final pass.",
+      "acceptanceCriteria": [
+        "manuscript_revised/section_*.md 전체 grep 'skill' = 0 (footnote 정의용 제외)",
+        "'formal mediation', 'platform-wide consumer welfare', 'AI promotes social equality', 'low-skilled workers benefited the most', 'single-order waiting time improved' (headline) 모두 0회",
+        "docs/04_claims_audit.md 에 grep 결과 + 점검 표"
+      ]
+    },
+    {
+      "id": "US-018",
+      "title": "Reference audit",
+      "priority": 18,
+      "passes": true,
+      "description": "R1-Minor-1 address.",
+      "acceptanceCriteria": [
+        "docs/05_reference_audit.md 작성",
+        "Y. Chen et al. (2024a/b) 중복 → 단일 entry",
+        "Allon et al. (2018) SSRN → final published version 검색 결과",
+        "Brynjolfsson et al. (2025) 제목 trailing '*' 제거",
+        "본문 인용된 모든 reference 가 list 에 존재 + 모든 list reference 가 본문에 인용"
+      ]
+    },
+    {
+      "id": "US-019",
+      "title": "Response letter v1",
+      "priority": 19,
+      "passes": true,
+      "description": "Reviewer 1 (1-1 ~ Minor-3), Reviewer 2 (1 ~ 11), Associate Editor (1 ~ 4) 각 코멘트에 numbered response.",
+      "acceptanceCriteria": [
+        "response/response_letter_v1.md 작성",
+        "25개 reviewer 코멘트 모두 매핑된 numbered response",
+        "각 response: (i) 원 코멘트 인용, (ii) 응답, (iii) manuscript 변경 위치, (iv) 새 evidence",
+        "docs/01_reviewer_comments_mapped.md 의 모든 ID 가 response_letter_v1.md 에 등장"
+      ]
+    },
+    {
+      "id": "US-020",
+      "title": "Submission readiness check",
+      "priority": 20,
+      "passes": true,
+      "description": "최종 점검.",
+      "acceptanceCriteria": [
+        "docs/99_submission_readiness_check.md 작성",
+        "Manuscript/Algorithmic task assignment_manuscript_final.docx 미수정 (md5 동일)",
+        "Review/review.docx 미수정",
+        "data/raw/ csv 들 미수정",
+        "previous_resource/ R 스크립트 + RData 미수정",
+        "manuscript_revised/, response/, output/, docs/ 산출물 존재",
+        "본문 모든 숫자가 output/tables/ 와 일치"
+      ]
+    }
+  ],
+  "completionCriteria": [
+    "20개 user stories 모두 passes: true",
+    "원본 파일 (manuscript .docx, review .docx, raw csv, RData) 모두 미수정",
+    "Response letter + revised manuscript + 모든 supporting analysis 가 정합적",
+    "2026-05-30 submission deadline 이전에 완료"
+  ],
+  "metadata": {
+    "createdAt": "2026-05-06",
+    "lastUpdated": "2026-05-06",
+    "version": 2,
+    "language": "ko-KR",
+    "originalTaskOwner": "arthur@gigr.ai",
+    "submissionDeadline": "2026-05-30",
+    "reproductionStatus": "VERIFIED — manuscript Table 4-7 모든 계수 0.001 단위까지 일치",
+    "ralphIteration": 1,
+    "verificationStatus": "All 21 stories passed; originals unchanged; 9 new analyses + 7 manuscript sections + response letter complete; body-table consistency verified across all spot checks; manuscript p=0.026 reproduced via LOG spec test (p=0.0217)"
+  }
+}

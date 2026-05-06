@@ -1,0 +1,115 @@
+
+[2026-05-06 11:52:35.400438] PIPELINE START
+[2026-05-06 11:52:36.431828] [01] loading RData (data_order = datap_order, fully preprocessed)
+[2026-05-06 11:52:39.918131]    datap_order: 815191 rows, 584 riders
+Warning message:
+There were 184 warnings in `summarise()`.
+The first warning was:
+ℹ In argument: `adopt_date = min(date[is_rec_completed == 1])`.
+ℹ In group 1: `rider_id = 7643`.
+Caused by warning in `min.default()`:
+! no non-missing arguments to min; returning Inf
+ℹ Run `dplyr::last_dplyr_warnings()` to see the 183 remaining warnings. 
+[2026-05-06 11:52:40.014689]    treatp_riders: 400 adopters
+
+[2026-05-06 11:52:40.01477] [02] building datap_shift...
+[2026-05-06 11:53:18.264048]    datap_shift: 283895 rows
+
+[2026-05-06 11:53:18.264146] [03] building datap_day...
+           used  (Mb) gc trigger   (Mb) limit (Mb)  max used   (Mb)
+Ncells  2308541 123.3   10915276  583.0         NA  13644094  728.7
+Vcells 95496544 728.6  161116203 1229.3      49152 142387310 1086.4
+[2026-05-06 11:53:20.824557]    datap_day: 26280 rows
+
+[2026-05-06 11:53:20.824643] [04] proficiency + matching covariates...
+[2026-05-06 11:53:23.536464]    pre_var_peak_nona: 582 riders
+
+[2026-05-06 11:53:23.536562] [05] psmatch2_peak (caliper 0.05)...
+Warning: Fewer control units than treated units; not all treated units will get a match.
+[2026-05-06 11:53:23.556528]    matched riders: 324
+[2026-05-06 11:53:23.65703]    datap_day_matched   : 12422 rows, 324 riders
+[2026-05-06 11:53:23.657286]    datap_shift_matched : 136420 rows, 324 riders
+
+[2026-05-06 11:53:23.697089] [06] regressions...
+
+=========== Table 4 (productivity) ===========
+
+--- T4 productivity ---
+DID  ln(orders_per_hour)                                   | est= +0.0202 SE=0.0097 p=0.0375 ** N=12422 
+DDD  ln(orders_per_hour) After:Treat:prof_low              | est= +0.0114 SE=0.0221 p=0.6054  N=12422 
+DDD  ln(orders_per_hour) After:Treat:prof_med              | est= +0.0483 SE=0.0141 p=0.0006 *** N=12422 
+DDD  ln(orders_per_hour) After:Treat:prof_high             | est= -0.0011 SE=0.0125 p=0.9293  N=12422 
+
+=========== Table 6 (day-level) ===========
+
+--- T6 n_stacks ---
+DID  ln(total_shift)                                       | est= -0.0119 SE=0.0247 p=0.6308  N=12422 
+DDD  ln(total_shift) After:Treat:prof_low                  | est= -0.0490 SE=0.0537 p=0.3618  N=12422 
+DDD  ln(total_shift) After:Treat:prof_med                  | est= +0.0201 SE=0.0401 p=0.6158  N=12422 
+DDD  ln(total_shift) After:Treat:prof_high                 | est= -0.0137 SE=0.0370 p=0.7118  N=12422 
+
+--- T6 total_orders ---
+DID  ln(total_orders)                                      | est= +0.0098 SE=0.0279 p=0.7269  N=12422 
+DDD  ln(total_orders) After:Treat:prof_low                 | est= -0.0128 SE=0.0614 p=0.8350  N=12422 
+DDD  ln(total_orders) After:Treat:prof_med                 | est= +0.0367 SE=0.0448 p=0.4132  N=12422 
+DDD  ln(total_orders) After:Treat:prof_high                | est= +0.0058 SE=0.0438 p=0.8955  N=12422 
+
+--- T6 total_fee ---
+DID  ln(total_fee)                                         | est= +0.0088 SE=0.0383 p=0.8195  N=12422 
+DDD  ln(total_fee) After:Treat:prof_low                    | est= -0.0198 SE=0.0980 p=0.8402  N=12422 
+DDD  ln(total_fee) After:Treat:prof_med                    | est= +0.0364 SE=0.0559 p=0.5156  N=12422 
+DDD  ln(total_fee) After:Treat:prof_high                   | est= +0.0076 SE=0.0529 p=0.8860  N=12422 
+
+--- T6 total_labor ---
+DID  ln(total_labor)                                       | est= -0.0105 SE=0.0289 p=0.7170  N=12422 
+DDD  ln(total_labor) After:Treat:prof_low                  | est= -0.0561 SE=0.0599 p=0.3496  N=12422 
+DDD  ln(total_labor) After:Treat:prof_med                  | est= -0.0371 SE=0.0419 p=0.3764  N=12422 
+DDD  ln(total_labor) After:Treat:prof_high                 | est= +0.0465 SE=0.0417 p=0.2645  N=12422 
+
+=========== Table 5 (stack-level) ===========
+
+--- T5 num_orders ---
+DID  ln(num_orders)                                        | est= +0.0146 SE=0.0098 p=0.1359  N=136420 
+DDD  ln(num_orders) After:Treat:prof_low                   | est= +0.0157 SE=0.0164 p=0.3378  N=136420 
+DDD  ln(num_orders) After:Treat:prof_med                   | est= +0.0111 SE=0.0136 p=0.4143  N=136420 
+DDD  ln(num_orders) After:Treat:prof_high                  | est= +0.0141 SE=0.0174 p=0.4159  N=136420 
+
+--- T5 total_duration ---
+DID  ln(total_duration)                                    | est= -0.0022 SE=0.0092 p=0.8124  N=136420 
+DDD  ln(total_duration) After:Treat:prof_low               | est= +0.0160 SE=0.0157 p=0.3062  N=136420 
+DDD  ln(total_duration) After:Treat:prof_med               | est= -0.0252 SE=0.0137 p=0.0654 * N=136420 
+DDD  ln(total_duration) After:Treat:prof_high              | est= +0.0093 SE=0.0158 p=0.5533  N=136420 
+
+--- T5 avg_duration_orders ---
+DID  ln(avg_duration_orders)                               | est= -0.0168 SE=0.0044 p=0.0001 *** N=136420 
+DDD  ln(avg_duration_orders) After:Treat:prof_low          | est= +0.0003 SE=0.0095 p=0.9743  N=136420 
+DDD  ln(avg_duration_orders) After:Treat:prof_med          | est= -0.0363 SE=0.0067 p=0.0000 *** N=136420 
+DDD  ln(avg_duration_orders) After:Treat:prof_high         | est= -0.0048 SE=0.0063 p=0.4429  N=136420 
+
+--- T5 idle_btw_shifts ---
+DID  ln(idle_btw_shifts)                                   | est= -0.0001 SE=0.0206 p=0.9959  N=114779 
+DDD  ln(idle_btw_shifts) After:Treat:prof_low              | est= +0.1329 SE=0.0417 p=0.0014 *** N=114779 
+DDD  ln(idle_btw_shifts) After:Treat:prof_med              | est= -0.0482 SE=0.0336 p=0.1518  N=114779 
+DDD  ln(idle_btw_shifts) After:Treat:prof_high             | est= -0.0072 SE=0.0317 p=0.8210  N=114779 
+
+=========== Table 7 (waiting time) ===========
+
+--- T7 shift-all ---
+DID  ln(avg_waiting)                                       | est= -0.0129 SE=0.0045 p=0.0044 *** N=134013 
+DDD  ln(avg_waiting) After:Treat:prof_low                  | est= -0.0016 SE=0.0087 p=0.8542  N=134013 
+DDD  ln(avg_waiting) After:Treat:prof_med                  | est= -0.0333 SE=0.0074 p=0.0000 *** N=134013 
+DDD  ln(avg_waiting) After:Treat:prof_high                 | est= +0.0017 SE=0.0065 p=0.7986  N=134013 
+
+--- T7 shift-single ---
+DID  ln(avg_waiting)                                       | est= -0.0246 SE=0.0060 p=0.0000 *** N=63948 
+DDD  ln(avg_waiting) After:Treat:prof_low                  | est= -0.0061 SE=0.0116 p=0.5985  N=63948 
+DDD  ln(avg_waiting) After:Treat:prof_med                  | est= -0.0427 SE=0.0092 p=0.0000 *** N=63948 
+DDD  ln(avg_waiting) After:Treat:prof_high                 | est= -0.0124 SE=0.0101 p=0.2183  N=63948 
+
+--- T7 shift-stacked ---
+DID  ln(avg_waiting)                                       | est= -0.0056 SE=0.0046 p=0.2189  N=70065 
+DDD  ln(avg_waiting) After:Treat:prof_low                  | est= +0.0012 SE=0.0104 p=0.9095  N=70065 
+DDD  ln(avg_waiting) After:Treat:prof_med                  | est= -0.0233 SE=0.0073 p=0.0014 *** N=70065 
+DDD  ln(avg_waiting) After:Treat:prof_high                 | est= +0.0058 SE=0.0062 p=0.3460  N=70065 
+
+[2026-05-06 11:53:27.290456] PIPELINE END  total = 0.9 min

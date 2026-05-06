@@ -1,0 +1,11 @@
+##### Table1. Definitions of Key Variables and Descriptive Statistics #####
+mean(data_shift$num_orders, na.rm=T); sd(data_shift$num_orders, na.rm=T)
+mean(data_shift$total_duration, na.rm=T); sd(data_shift$total_duration, na.rm=T)
+mean(data_shift$avg_duration_orders, na.rm=T); sd(data_shift$avg_duration_orders, na.rm=T)
+mean(data_shift$idle_btw_shifts, na.rm=T); sd(data_shift$idle_btw_shifts, na.rm=T)
+mean(data_shift$avg_waiting, na.rm=T); sd(data_shift$avg_waiting, na.rm=T)
+mean(data_day$total_shift, na.rm=T); sd(data_day$total_shift, na.rm=T)
+mean(data_day$total_orders, na.rm=T); sd(data_day$total_orders, na.rm=T)
+mean(data_day$total_fee, na.rm=T); sd(data_day$total_fee, na.rm=T)
+mean(data_day$total_labor, na.rm=T); sd(data_day$total_labor, na.rm=T)
+mean(data_day$orders_per_hour, na.rm=T); sd(data_day$orders_per_hour, na.rm=T)

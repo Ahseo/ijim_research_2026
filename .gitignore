@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Large raw data — kept locally only (re-download from Drive if needed)
+data/raw/*.csv
+data/processed/*.csv
+data/processed/
+
+# Large RData — kept locally only
+previous_resource/ISR_submitted ver_data.RData
+previous_resource/*.RData
+
+# Large reference csvs in drive_4
+previous_resource/drive_4/*.csv
+
+# R/Python local artifacts
+*.Rhistory
+*.Rproj.user/
+__pycache__/
+*.pyc
+
+# Editor / hidden
+.claude/
+*.bak
+
+# Backup or temp
+*~
+*.swp

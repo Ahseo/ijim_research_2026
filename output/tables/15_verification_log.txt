@@ -1,0 +1,90 @@
+
+========================================================
+  RALPH VERIFICATION — Iteration 1
+========================================================
+
+[1] ORIGINALS INTEGRITY
+  Manuscript/Algorithmic task assignment_manuscript_final.docx             size=    391422  md5=5b68ec1536ded8d07e855b9b4942b90b
+  PASS  exists: Algorithmic task assignment_manuscript_final.docx
+  Review/review.docx                                                       size=     25024  md5=d7faa06df4c21345dd112557c4029062
+  PASS  exists: review.docx
+  previous_resource/ISR_submitted ver_data.RData                           size= 808434101  md5=cff95c9a58e17c58b117be6d029047a5
+  PASS  exists: ISR_submitted ver_data.RData
+  previous_resource/drive_2/02_DID matching.R                              size=     55794  md5=c506e88808b204f3f3dc3ac930bd6a1f
+  PASS  exists: 02_DID matching.R
+  previous_resource/drive_2/01_Data check and cleansing.R                  size=     14656  md5=18f57a105e61007d3e8baf24ccb3ee04
+  PASS  exists: 01_Data check and cleansing.R
+  data/raw/*.csv files: 9
+
+[2] US-001 REPRODUCTION (manuscript-exact)
+  PASS  T4 DID estimate : actual=0.1406 expected=0.1410 (within 0.0010)
+[1] TRUE
+  PASS  T4 DID SE : actual=0.0471 expected=0.0470 (within 0.0010)
+[1] TRUE
+  PASS  T4 DDD low estimate : actual=0.0884 expected=0.0880 (within 0.0010)
+[1] TRUE
+  PASS  T4 DDD med estimate : actual=0.2493 expected=0.2490 (within 0.0010)
+[1] TRUE
+  PASS  T4 DDD high estimate : actual=0.0671 expected=0.0670 (within 0.0010)
+[1] TRUE
+  PASS  T5 num_orders DDD low : actual=0.1418 expected=0.1420 (within 0.0010)
+[1] TRUE
+  PASS  T5 num_orders DDD med : actual=0.1325 expected=0.1330 (within 0.0010)
+[1] TRUE
+  PASS  T5 num_orders DDD high : actual=0.1661 expected=0.1660 (within 0.0010)
+[1] TRUE
+  PASS  T7 single DID : actual=-0.1843 expected=-0.1840 (within 0.0010)
+[1] TRUE
+
+[3] PAIRWISE TEST (manuscript text p=0.026 reproduction)
+  med vs (low+high)/2 on log-prod: p=0.0217 (manuscript: 0.026)
+  PASS  Manuscript p=0.026 (LOG spec) reproduces
+
+[4] SKILL CLASSIFICATION AUDIT
+  PASS  No worker-classification 'skill' in section_*.md
+
+[5] CLAIMS-TO-AVOID
+  FAIL  3 occ: 'formal mediation'
+  FAIL  2 occ: 'platform-wide consumer welfare'
+  PASS  0 occ: 'AI promotes social equality'
+  PASS  0 occ: 'AI promote social equality'
+  PASS  0 occ: 'low-skilled workers benefited the most'
+  FAIL  1 occ: 'single-order waiting time improved'
+
+[6] RESPONSE LETTER ID COVERAGE
+  PASS  All 24 reviewer IDs present
+
+[7] OUTPUT FILES
+  PASS  All 21 output files exist
+
+[8] MANUSCRIPT SECTIONS
+  PASS  section_1: section_1_introduction.md
+  PASS  section_2: section_2_related_literature.md
+  PASS  section_3: section_3_background.md
+  PASS  section_4: section_4_empirical_models.md
+  PASS  section_5: section_5_results.md
+  PASS  section_6: section_6_discussion.md
+  PASS  section_7: section_7_conclusion.md
+  PASS  docx generated
+  PASS  response docx generated
+
+[9] BODY ↔ TABLE CONSISTENCY
+  PASS  Pre-trend F : actual=0.6451 expected=0.6500 (within 0.0500)
+[1] TRUE
+  PASS  Pre-trend p : actual=0.6307 expected=0.6300 (within 0.0500)
+[1] TRUE
+  PASS  Stable DID : actual=0.1640 expected=0.1640 (within 0.0010)
+[1] TRUE
+  PASS  Long-term Nov 2020 : actual=0.2130 expected=0.2130 (within 0.0050)
+[1] TRUE
+  PASS  Gini DiD : actual=-0.0054 expected=-0.0050 (within 0.0010)
+[1] TRUE
+  PASS  MDE DID : actual=2.8067 expected=2.8100 (within 0.0500)
+[1] TRUE
+
+========================================================
+  TOTAL ISSUES: 3
+    - avoid: formal mediation
+    - avoid: platform-wide consumer welfare
+    - avoid: single-order waiting time improved
+========================================================

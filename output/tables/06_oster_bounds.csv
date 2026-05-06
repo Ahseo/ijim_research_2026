@@ -1,0 +1,8 @@
+metric,value
+beta_restricted,0.14059971445682
+beta_full,0.140897212733593
+R2_restricted,0.659244827113937
+R2_full,0.706313088847557
+R_max (1.3 x R2_full),0.918207015501824
+beta_star (bias-adjusted),0.142236503281333
+delta*,-105.202872499424

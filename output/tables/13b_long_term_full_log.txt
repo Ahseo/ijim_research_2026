@@ -1,0 +1,29 @@
+[2026-05-06 13:42:03.564311] Loading existing matched data...
+[2026-05-06 13:42:06.807178] Loading Dec-Feb csv...
+[2026-05-06 13:43:27.054895] Dec-Feb date range: 2020-11-30 ~ 2021-01-31
+[2026-05-06 13:43:27.760801] Matched-rider Dec-Feb orders: 400394 (riders 290)
+[2026-05-06 13:43:28.093057] Cleaned: 356490 rows
+[2026-05-06 13:43:36.340986] Combined day rows: 25368
+[2026-05-06 13:43:36.341367] Coverage: 2020-09-26 ~ 2021-01-31
+Months: 2020-09 2020-10 2020-11 2020-12 2021-01 
+Warning message:
+In chol.default(mat, pivot = TRUE, tol = tol) :
+  the matrix is either rank-deficient or not positive definite
+
+=== Extended event-study ===
+                        Estimate Cluster s.e.  t value    Pr(>|t|)
+mon_label2020-10:Treat 0.1055593   0.07566659 1.395058 0.163922597
+mon_label2020-09:Treat       NaN   0.00000000      NaN         NaN
+mon_label2020-11:Treat 0.2129633   0.07698429 2.766322 0.005983791
+mon_label2020-12:Treat 0.1514497   0.09916545 1.527243 0.127644267
+mon_label2021-01:Treat 0.1449678   0.09996672 1.450161 0.147949230
+Warning message:
+In chol.default(mat, pivot = TRUE, tol = tol) :
+  the matrix is either rank-deficient or not positive definite
+Warning message:
+In chol.default(mat, pivot = TRUE, tol = tol) :
+  the matrix is either rank-deficient or not positive definite
+Warning message:
+Removed 1 row containing missing values or values outside the scale range (`geom_pointrange()`). 
+
+[2026-05-06 13:43:37.701626] [US-010] DONE  total = 1.6 min

@@ -1,0 +1,50 @@
+[2026-05-06] PHASE 0 (setup) — DONE
+- Folder structure (data/, code/, docs/, output/, response/, manuscript_revised/, previous_resource/, .omc/)
+- Files moved (originals relocated, none deleted):
+  * Downloads/drive-1 → previous_resource/  (22 R scripts + ISR_submitted ver_data.RData [808MB] + before_after_prod.csv)
+  * Downloads/drive-2 → previous_resource/drive_2/  (01_Data check.R + 02_DID matching.R [55KB CRITICAL])
+  * Downloads/drive-3 → previous_resource/drive_3/  (data_agg.csv + psm csvs)
+  * Downloads/drive-4 → previous_resource/drive_4/  (data_day_matched/data_stack_matched/data_order_matched csvs)
+  * Downloads/shift-level analysis.R → previous_resource/
+  * ../ijim_ai_research/data/*.csv → data/raw/  (9 csvs ~12GB)
+- docx → text:  docs/00_review_extracted.md, docs/00_manuscript_extracted.md, docs/00_manuscript_tables.md
+- Reviewer comments mapped: docs/01_reviewer_comments_mapped.md  (25 comments: R1, R2, AE)
+- Phase plan: docs/02_revision_roadmap.md
+
+[2026-05-06] PHASE 1 (reproduction) — DONE & VERIFIED ✅
+- code/00_diagnose_rdata.R — 22 RData objects identified
+- code/01_reproduce_results.R — first ln() + riderDOW + buffer attempt (T4/T5/T7 close, T6 partial)
+- DISCOVERY: manuscript Table 4-7 spec ≠ 02_DID matching.R script
+  * Manuscript uses LINEAR outcome (NOT log)
+  * Cluster: rider_id (NOT riderDOW)
+  * NO 6-day rollout buffer filter (uses full 14,102 rows)
+- code/04_manuscript_exact_spec.R — manuscript-exact spec
+- RESULT: T4/T5/T6/T7 모든 계수 manuscript와 0.001 단위까지 정확 일치
+  * T4 DID = 0.1406 (manuscript 0.141***)
+  * T4 DDD med = 0.2493 (manuscript 0.249***)
+  * T7 single DID = -0.1843 (manuscript -0.184**)
+  * 기타 모든 outcomes 정확 일치
+  * 미세한 1건: T6 col1 (n_stacks) low — mine 0.308, manuscript 0.380 (manuscript typo 추정)
+- 검증된 spec docs/03_evidence_log.md 에 정리
+
+[NEXT] PHASE 2 (new analyses + revision) — START
+- /oh-my-claudecode:ralph 또는 /ralph 로 .omc/prd.json 의 US-002 ~ US-020 진행
+- US-002 event-study, US-003 Oster, US-004 dose-response, US-005 stable workers,
+  US-006 inequality, US-007 learning dynamics, US-008 worker-customer linkage,
+  US-009 submission diagnostics, US-010 long-term Dec-Feb extension
+- US-011 ~ US-016 manuscript revision draft (Section 1 ~ 7)
+- US-017 skill→proficiency, US-018 reference audit, US-019 response letter, US-020 readiness
+
+KEY DO-NOT-MODIFY paths:
+- Manuscript/Algorithmic task assignment_manuscript_final.docx
+- Review/review.docx
+- previous_resource/**
+- data/raw/**
+
+VERIFIED REPRODUCTION SPEC (apply to ALL new analyses):
+- felm(y ~ ... | rider_id + station_date | 0 | rider_id, data = day)  # day-level
+- felm(y ~ ... | rider_id + station_date + hourDOW | 0 | rider_id, data = shift)  # stack-level
+- LINEAR outcome (no ln())
+- For T7-style: + avg_dist control
+- DDD: After:Treat:prof_low + After:Treat:prof_med + After:Treat:prof_high + After:prof_med + After:prof_high
+- NO buffer filter (full sample)

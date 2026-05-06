@@ -1,21 +1,68 @@
 # ijim_research_2026
 
-0. (리소스) 기존 코드 및 rawdata링크, 논문 원문 및 리뷰어 코멘트 파일 위치
-- 모든 rawdata 링크: https://drive.google.com/drive/folders/1HDO3ByxGIljWx_pHzOnX6G0xyjdteq4z?usp=sharing
-- 논문 원문 작성 및 분석을 위한 모든 기존 리소스(코드, .RData파일 등) 링크: https://drive.google.com/drive/folders/19dZFSwOHzrneZcukS-UZl0HK_A1rRHYi?usp=sharing
-- 논문 원문: Manuscript 폴더 내 Algorithmic task assignment_manuscript_final.docx 파일
-- 리뷰어 코멘트 원문: Review 폴더 내 review.docx 파일
+JJIM-D-25-02826 — *Does AI Benefit All Platform Stakeholders?* major revision workspace.
+Submission deadline: **2026-05-30**.
 
-1. (사전 준비) 논문 원문의 결과 재현
-- previous_resource 폴더의 ISR_submitted ver_data.RData 파일의 data_day_matched1, data_shift_matched1을 직접 로드하여 사용하면 논문 원문 내 테이블의 모든 coefficient와
-  SE 정확히 재현 가능
-- claude가 기존 결과를 재현한게 기존 리소스 링크의 reproduce_from_rdata.R 파일에 있으니 참고하면 빠르게 재현 가능할 것
-- 리비전의 모든 추가분석은 기존 리소스 링크의 ISR_submitted ver_data.RData 파일의 data_day_matched1, data_shift_matched1 데이터 셋에서 출발해야함
-- 리뷰어 코멘트에서 더 긴 기간 또는 더 많은 샘플에 대한 추가 분석을 요구할 경우 추가 데이터 셋 (recommendation_data_2023.csv, recommendation_data_busan_exclusive_dec_feb.csv, riders_2023.csv, store_2023.csv)을 추가 사용해서 분석 진행 해도됨
+## 0. 리소스 링크 (외부)
 
-2. (리비전) 리뷰어 코멘트 address
--  리뷰어 주요 코멘트 address 및 단계적 논문 수정 계획 세워줘
--  리뷰어 코멘트에 대한 response note 준비도 필요해
--  논문 원문 수정 초안도 작성 부탁해
+- 모든 rawdata: https://drive.google.com/drive/folders/1HDO3ByxGIljWx_pHzOnX6G0xyjdteq4z?usp=sharing
+- 기존 리소스(코드, .RData): https://drive.google.com/drive/folders/19dZFSwOHzrneZcukS-UZl0HK_A1rRHYi?usp=sharing
 
-* 논문 원문, 리뷰어 코멘트 원문, 원본 데이터 등은 유지하고 수정사항들은 새로운 파일/폴더에 추가해
+## 1. 폴더 구조
+
+```
+ijim_research_2026/
+├── Manuscript/                  # 원본 (수정 금지)
+│   └── Algorithmic task assignment_manuscript_final.docx
+├── Review/                      # 원본 (수정 금지)
+│   └── review.docx
+├── previous_resource/           # 원본 R 스크립트 + RData (수정 금지)
+│   ├── ISR_submitted ver_data.RData   (data_day_matched1, data_shift_matched1)
+│   └── *.R   (기존 분석 코드 22개)
+├── data/
+│   ├── raw/                     # 원본 csv (수정 금지)
+│   └── processed/               # 가공 산출 (regenerable)
+├── code/                        # 새 R 분석 스크립트
+├── docs/                        # 리뷰어 코멘트 매핑, roadmap, audit
+├── output/
+│   ├── tables/
+│   ├── figures/
+│   └── interpretation/
+├── manuscript_revised/          # 수정 본문 초안
+├── response/                    # response letter
+├── .omc/                        # OMC Ralph state (prd.json, progress.txt)
+├── CLAUDE.md
+└── README.md
+```
+
+## 2. 핵심 문서
+
+| 파일 | 역할 |
+|------|------|
+| `docs/00_review_extracted.md` | review.docx 텍스트 추출 |
+| `docs/00_manuscript_extracted.md` | manuscript .docx 텍스트 추출 |
+| `docs/01_reviewer_comments_mapped.md` | 25개 reviewer 코멘트 (R1-#, R2-#, AE-#) + address 전략 |
+| `docs/02_revision_roadmap.md` | Phase 0–5 단계별 계획 |
+| `.omc/prd.json` | OMC Ralph 용 21개 user stories |
+
+## 3. 재현 시작점
+
+```r
+load("previous_resource/ISR_submitted ver_data.RData")
+# 사용: data_day_matched1, data_shift_matched1
+```
+
+장기 확장 분석은 `data/raw/recommendation_data_busan_exclusive_dec_feb.csv` 사용.
+
+## 4. Ralph 실행
+
+```
+/ralph "address all reviewer comments per .omc/prd.json"
+```
+
+Ralph 가 `.omc/prd.json` 의 user story 를 순서대로 검증하며 진행.
+
+## 5. 원본 보존 원칙
+
+- `Manuscript/`, `Review/`, `previous_resource/`, `data/raw/` 의 모든 파일 **수정 금지**.
+- 모든 산출물은 `code/`, `docs/`, `output/`, `manuscript_revised/`, `response/`, `.omc/` 에만 작성.

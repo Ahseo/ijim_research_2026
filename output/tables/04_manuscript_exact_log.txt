@@ -1,0 +1,100 @@
+day rows = 14102 (manuscript expects 14,102)
+shift rows = 153190 (manuscript expects 153,190)
+
+========================  Table 4 (productivity)  ==============================
+Manuscript: DID 0.141***(0.047), low 0.088(0.071), med 0.249***(0.066), high 0.067(0.084)
+
+--- T4 orders_per_hour (LINEAR) ---
+DID  orders_per_hour                                       | est= +0.1406 SE=0.0471 p=0.0030 *** N=14102 
+DDD  orders_per_hour After:Treat:prof_low                  | est= +0.0884 SE=0.0715 p=0.2170  N=14102 
+DDD  orders_per_hour After:Treat:prof_med                  | est= +0.2493 SE=0.0661 p=0.0002 *** N=14102 
+DDD  orders_per_hour After:Treat:prof_high                 | est= +0.0671 SE=0.0835 p=0.4225  N=14102 
+
+========================  Table 6 (day-level)  =================================
+Manuscript T6 col1 DDD low 0.380(0.450), med 0.299(0.445), high -0.548(0.397) [n_stacks]
+
+--- T6 total_shift (LINEAR) ---
+DID  total_shift                                           | est= -0.0043 SE=0.2610 p=0.9867  N=14102 
+DDD  total_shift After:Treat:prof_low                      | est= +0.3083 SE=0.4499 p=0.4936  N=14102 
+DDD  total_shift After:Treat:prof_med                      | est= +0.2992 SE=0.4453 p=0.5022  N=14102 
+DDD  total_shift After:Treat:prof_high                     | est= -0.5483 SE=0.3973 p=0.1684  N=14102 
+
+Manuscript T6 col2 DDD low 2.060**(0.916), med 2.086**(1.048), high -0.164(1.247) [total_orders]
+
+--- T6 total_orders (LINEAR) ---
+DID  total_orders                                          | est= +1.2666 SE=0.6480 p=0.0515 * N=14102 
+DDD  total_orders After:Treat:prof_low                     | est= +2.0603 SE=0.9163 p=0.0252 ** N=14102 
+DDD  total_orders After:Treat:prof_med                     | est= +2.0856 SE=1.0483 p=0.0475 ** N=14102 
+DDD  total_orders After:Treat:prof_high                    | est= -0.1635 SE=1.2466 p=0.8957  N=14102 
+
+Manuscript T6 col3 DDD low 4.384**(1.956), med 4.409*(2.266), high -0.205(2.619) [total_earnings, $]
+
+--- T6 total_fee (LINEAR) ---
+DID  total_fee                                             | est=+3799.3484 SE=1929.1328 p=0.0497 ** N=14102 
+DDD  total_fee After:Treat:prof_low                        | est=+6100.9232 SE=2721.4361 p=0.0256 ** N=14102 
+DDD  total_fee After:Treat:prof_med                        | est=+6135.1009 SE=3153.1917 p=0.0525 * N=14102 
+DDD  total_fee After:Treat:prof_high                       | est=-284.7756 SE=3644.0378 p=0.9378  N=14102 
+
+Manuscript T6 col4 DDD low 0.438*(0.256), med 0.095(0.215), high -0.147(0.187) [working hours]
+
+--- T6 total_labor (LINEAR) ---
+DID  total_labor                                           | est= +0.1069 SE=0.1307 p=0.4138  N=14102 
+DDD  total_labor After:Treat:prof_low                      | est= +0.4377 SE=0.2555 p=0.0877 * N=14102 
+DDD  total_labor After:Treat:prof_med                      | est= +0.0950 SE=0.2146 p=0.6583  N=14102 
+DDD  total_labor After:Treat:prof_high                     | est= -0.1470 SE=0.1868 p=0.4317  N=14102 
+
+========================  Table 5 (stack-level)  ===============================
+Manuscript T5 col1 DDD low 0.142**(0.070), med 0.133*(0.078), high 0.166(0.145) [num_orders]
+
+--- T5 num_orders (LINEAR) ---
+DID  num_orders                                            | est= +0.1477 SE=0.0673 p=0.0289 ** N=153190 
+DDD  num_orders After:Treat:prof_low                       | est= +0.1418 SE=0.0699 p=0.0431 ** N=153190 
+DDD  num_orders After:Treat:prof_med                       | est= +0.1325 SE=0.0777 p=0.0889 * N=153190 
+DDD  num_orders After:Treat:prof_high                      | est= +0.1661 SE=0.1448 p=0.2523  N=153190 
+
+Manuscript T5 col2 DDD low 1.091*(0.564), med 0.523(0.637), high 0.856(1.013) [stack_completion_time]
+
+--- T5 total_duration (LINEAR) ---
+DID  total_duration                                        | est= +0.7814 SE=0.4873 p=0.1098  N=153190 
+DDD  total_duration After:Treat:prof_low                   | est= +1.0909 SE=0.5640 p=0.0539 * N=153190 
+DDD  total_duration After:Treat:prof_med                   | est= +0.5234 SE=0.6368 p=0.4117  N=153190 
+DDD  total_duration After:Treat:prof_high                  | est= +0.8562 SE=1.0126 p=0.3984  N=153190 
+
+Manuscript T5 col3 DDD low 0.008(0.133), med -0.229**(0.093), high -0.040(0.069) [time_per_order]
+
+--- T5 avg_duration_orders (LINEAR) ---
+DID  avg_duration_orders                                   | est= -0.1157 SE=0.0590 p=0.0508 * N=153190 
+DDD  avg_duration_orders After:Treat:prof_low              | est= +0.0075 SE=0.1326 p=0.9549  N=153190 
+DDD  avg_duration_orders After:Treat:prof_med              | est= -0.2286 SE=0.0930 p=0.0144 ** N=153190 
+DDD  avg_duration_orders After:Treat:prof_high             | est= -0.0403 SE=0.0688 p=0.5581  N=153190 
+
+Manuscript T5 col4 DDD low 0.566**(0.286), med -0.583**(0.272), high -0.146(0.221) [idle_time]
+
+--- T5 idle_btw_shifts (LINEAR) ---
+DID  idle_btw_shifts                                       | est= -0.1615 SE=0.1540 p=0.2952  N=127955 
+DDD  idle_btw_shifts After:Treat:prof_low                  | est= +0.5656 SE=0.2864 p=0.0491 ** N=127955 
+DDD  idle_btw_shifts After:Treat:prof_med                  | est= -0.5834 SE=0.2718 p=0.0326 ** N=127955 
+DDD  idle_btw_shifts After:Treat:prof_high                 | est= -0.1459 SE=0.2213 p=0.5101  N=127955 
+
+========================  Table 7 (waiting time)  ==============================
+Manuscript T7 col1 DID -0.025(0.084) [shift-all]
+Manuscript T7 col2 DID -0.184**(0.085) [shift-single]
+Manuscript T7 col3 DID 0.084(0.095) [shift-stacked]
+
+--- T7 avg_waiting all (LINEAR) ---
+DID  avg_waiting                                           | est= -0.0254 SE=0.0845 p=0.7643  N=150691 
+DDD  avg_waiting After:Treat:prof_low                      | est= +0.0287 SE=0.1618 p=0.8590  N=150691 
+DDD  avg_waiting After:Treat:prof_med                      | est= -0.1293 SE=0.1347 p=0.3376  N=150691 
+DDD  avg_waiting After:Treat:prof_high                     | est= +0.0822 SE=0.1309 p=0.5306  N=150691 
+
+--- T7 avg_waiting single (LINEAR) ---
+DID  avg_waiting                                           | est= -0.1843 SE=0.0845 p=0.0299 ** N=74333 
+DDD  avg_waiting After:Treat:prof_low                      | est= -0.0091 SE=0.1721 p=0.9580  N=74333 
+DDD  avg_waiting After:Treat:prof_med                      | est= -0.2598 SE=0.1249 p=0.0382 ** N=74333 
+DDD  avg_waiting After:Treat:prof_high                     | est= -0.1775 SE=0.1204 p=0.1413  N=74333 
+
+--- T7 avg_waiting stacked (LINEAR) ---
+DID  avg_waiting                                           | est= +0.0838 SE=0.0949 p=0.3778  N=76358 
+DDD  avg_waiting After:Treat:prof_low                      | est= -0.0031 SE=0.2123 p=0.9882  N=76358 
+DDD  avg_waiting After:Treat:prof_med                      | est= -0.0243 SE=0.1605 p=0.8796  N=76358 
+DDD  avg_waiting After:Treat:prof_high                     | est= +0.2265 SE=0.1278 p=0.0772 * N=76358 

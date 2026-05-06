@@ -1,0 +1,91 @@
+[2026-05-06 11:54:43.44294] Loading RData + reconstructed datap_*
+From previous run (324-rider sample): day=12422, shift=136420
+
+[2026-05-06 11:54:46.727999] Rebuilding datap_day/datap_shift from data_order to keep all 584 riders
+[2026-05-06 11:55:24.737444] datap_shift FULL: 283895 rows, 584 riders
+[2026-05-06 11:55:26.810629] datap_day FULL: 26280 rows, 584 riders
+[2026-05-06 11:55:26.833687] using matched_data1: 336 riders
+[2026-05-06 11:55:26.940108] datap_day_matched   : 12813 rows, 336 riders
+[2026-05-06 11:55:26.940531] datap_shift_matched : 139201 rows, 336 riders
+
+=========== Table 4 (productivity) ===========
+
+--- T4 productivity ---
+DID  ln(orders_per_hour)                                   | est= +0.0314 SE=0.0094 p=0.0008 *** N=12813 
+DDD  ln(orders_per_hour) After:Treat:prof_low              | est= +0.0153 SE=0.0188 p=0.4153  N=12813 
+DDD  ln(orders_per_hour) After:Treat:prof_med              | est= +0.0589 SE=0.0151 p=0.0001 *** N=12813 
+DDD  ln(orders_per_hour) After:Treat:prof_high             | est= +0.0111 SE=0.0124 p=0.3738  N=12813 
+
+=========== Table 6 (day-level) ===========
+
+--- T6 n_stacks ---
+DID  ln(total_shift)                                       | est= -0.0047 SE=0.0249 p=0.8502  N=12813 
+DDD  ln(total_shift) After:Treat:prof_low                  | est= +0.0252 SE=0.0484 p=0.6023  N=12813 
+DDD  ln(total_shift) After:Treat:prof_med                  | est= -0.0138 SE=0.0409 p=0.7353  N=12813 
+DDD  ln(total_shift) After:Treat:prof_high                 | est= -0.0166 SE=0.0381 p=0.6643  N=12813 
+
+--- T6 total_orders ---
+DID  ln(total_orders)                                      | est= +0.0482 SE=0.0283 p=0.0882 * N=12813 
+DDD  ln(total_orders) After:Treat:prof_low                 | est= +0.0825 SE=0.0564 p=0.1436  N=12813 
+DDD  ln(total_orders) After:Treat:prof_med                 | est= +0.0284 SE=0.0454 p=0.5317  N=12813 
+DDD  ln(total_orders) After:Treat:prof_high                | est= +0.0403 SE=0.0446 p=0.3665  N=12813 
+
+--- T6 total_fee ---
+DID  ln(total_fee)                                         | est= +0.0439 SE=0.0377 p=0.2442  N=12813 
+DDD  ln(total_fee) After:Treat:prof_low                    | est= +0.0742 SE=0.0862 p=0.3904  N=12813 
+DDD  ln(total_fee) After:Treat:prof_med                    | est= +0.0259 SE=0.0595 p=0.6638  N=12813 
+DDD  ln(total_fee) After:Treat:prof_high                   | est= +0.0381 SE=0.0528 p=0.4709  N=12813 
+
+--- T6 total_labor ---
+DID  ln(total_labor)                                       | est= +0.0169 SE=0.0294 p=0.5661  N=12813 
+DDD  ln(total_labor) After:Treat:prof_low                  | est= -0.0030 SE=0.0529 p=0.9548  N=12813 
+DDD  ln(total_labor) After:Treat:prof_med                  | est= +0.0509 SE=0.0462 p=0.2705  N=12813 
+DDD  ln(total_labor) After:Treat:prof_high                 | est= +0.0667 SE=0.0437 p=0.1268  N=12813 
+
+=========== Table 5 (stack-level) ===========
+
+--- T5 num_orders ---
+DID  ln(num_orders)                                        | est= +0.0328 SE=0.0097 p=0.0007 *** N=139201 
+DDD  ln(num_orders) After:Treat:prof_low                   | est= +0.0241 SE=0.0144 p=0.0938 * N=139201 
+DDD  ln(num_orders) After:Treat:prof_med                   | est= +0.0282 SE=0.0137 p=0.0390 ** N=139201 
+DDD  ln(num_orders) After:Treat:prof_high                  | est= +0.0410 SE=0.0184 p=0.0254 ** N=139201 
+
+--- T5 total_duration ---
+DID  ln(total_duration)                                    | est= +0.0186 SE=0.0091 p=0.0403 ** N=139201 
+DDD  ln(total_duration) After:Treat:prof_low               | est= +0.0235 SE=0.0133 p=0.0776 * N=139201 
+DDD  ln(total_duration) After:Treat:prof_med               | est= -0.0007 SE=0.0133 p=0.9570  N=139201 
+DDD  ln(total_duration) After:Treat:prof_high              | est= +0.0361 SE=0.0170 p=0.0335 ** N=139201 
+
+--- T5 avg_duration_orders ---
+DID  ln(avg_duration_orders)                               | est= -0.0142 SE=0.0041 p=0.0006 *** N=139201 
+DDD  ln(avg_duration_orders) After:Treat:prof_low          | est= -0.0006 SE=0.0081 p=0.9400  N=139201 
+DDD  ln(avg_duration_orders) After:Treat:prof_med          | est= -0.0289 SE=0.0068 p=0.0000 *** N=139201 
+DDD  ln(avg_duration_orders) After:Treat:prof_high         | est= -0.0050 SE=0.0062 p=0.4201  N=139201 
+
+--- T5 idle_btw_shifts ---
+DID  ln(idle_btw_shifts)                                   | est= -0.0222 SE=0.0205 p=0.2790  N=116291 
+DDD  ln(idle_btw_shifts) After:Treat:prof_low              | est= +0.0845 SE=0.0375 p=0.0243 ** N=116291 
+DDD  ln(idle_btw_shifts) After:Treat:prof_med              | est= -0.0874 SE=0.0338 p=0.0097 *** N=116291 
+DDD  ln(idle_btw_shifts) After:Treat:prof_high             | est= -0.0107 SE=0.0341 p=0.7536  N=116291 
+
+=========== Table 7 (waiting time) ===========
+
+--- T7 shift-all ---
+DID  ln(avg_waiting)                                       | est= -0.0049 SE=0.0042 p=0.2470  N=136921 
+DDD  ln(avg_waiting) After:Treat:prof_low                  | est= +0.0006 SE=0.0075 p=0.9378  N=136921 
+DDD  ln(avg_waiting) After:Treat:prof_med                  | est= -0.0183 SE=0.0069 p=0.0076 *** N=136921 
+DDD  ln(avg_waiting) After:Treat:prof_high                 | est= +0.0073 SE=0.0070 p=0.2976  N=136921 
+
+--- T7 shift-single ---
+DID  ln(avg_waiting)                                       | est= -0.0191 SE=0.0056 p=0.0007 *** N=66887 
+DDD  ln(avg_waiting) After:Treat:prof_low                  | est= -0.0043 SE=0.0096 p=0.6519  N=66887 
+DDD  ln(avg_waiting) After:Treat:prof_med                  | est= -0.0309 SE=0.0090 p=0.0006 *** N=66887 
+DDD  ln(avg_waiting) After:Treat:prof_high                 | est= -0.0135 SE=0.0101 p=0.1827  N=66887 
+
+--- T7 shift-stacked ---
+DID  ln(avg_waiting)                                       | est= +0.0025 SE=0.0043 p=0.5552  N=70034 
+DDD  ln(avg_waiting) After:Treat:prof_low                  | est= +0.0026 SE=0.0094 p=0.7843  N=70034 
+DDD  ln(avg_waiting) After:Treat:prof_med                  | est= -0.0088 SE=0.0068 p=0.1925  N=70034 
+DDD  ln(avg_waiting) After:Treat:prof_high                 | est= +0.0127 SE=0.0065 p=0.0514 * N=70034 
+
+[2026-05-06 11:55:30.170604] DONE

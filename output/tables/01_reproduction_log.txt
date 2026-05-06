@@ -1,0 +1,66 @@
+
+=== sample sizes ===
+data_day_matched1   : 14102 rows, 336 riders
+data_shift_matched1 : 153190 rows, 336 riders
+date range          : 2020-09-26 ~ 2020-11-30
+mean(orders_per_hour) = 4.691 → coef 0.141 means ~3.0% effect
+
+================== Table 4: productivity (orders_per_hour) ==================
+NOTE: 0/66 fixed-effect singletons were removed (66 observations).
+T4 col1: DID  After:Treat                          | est= +0.1406  SE=0.0500  p=0.0053 ***  N=14036 
+NOTE: 0/66 fixed-effect singletons were removed (66 observations).
+T4 col2: DDD  After:Treat (=low ref)               | est= +0.2412  SE=0.0637  p=0.0002 ***  N=14036 
+T4 col2: DDD  After:Treat:prof_med                 | est= -0.0383  SE=0.0685  p=0.5765   N=14036 
+T4 col2: DDD  After:Treat:prof_high                | est= -0.2376  SE=0.0819  p=0.0040 ***  N=14036 
+
+================== Table 6: day-level outcomes ==================
+NOTE: 0/66 fixed-effect singletons were removed (66 observations).
+T6 n_stacks (total_shift)         After:Treat (low) | est= +0.0620  SE=0.4184  p=0.8824   N=14036 
+T6 n_stacks (total_shift)         After:Treat:prof_med | est= +0.0623  SE=0.5121  p=0.9033   N=14036 
+T6 n_stacks (total_shift)         After:Treat:prof_high | est= -0.2276  SE=0.5098  p=0.6555   N=14036 
+NOTE: 0/66 fixed-effect singletons were removed (66 observations).
+T6 total_orders                   After:Treat (low) | est= +2.2577  SE=0.8370  p=0.0073 ***  N=14036 
+T6 total_orders                   After:Treat:prof_med | est= -0.3730  SE=1.0617  p=0.7256   N=14036 
+T6 total_orders                   After:Treat:prof_high | est= -2.3452  SE=1.1158  p=0.0363 **  N=14036 
+NOTE: 0/66 fixed-effect singletons were removed (66 observations).
+T6 total_earnings (total_fee)     After:Treat (low) | est=+6873.4798  SE=2497.8525  p=0.0063 ***  N=14036 
+T6 total_earnings (total_fee)     After:Treat:prof_med | est=-1155.4265  SE=3171.7635  p=0.7159   N=14036 
+T6 total_earnings (total_fee)     After:Treat:prof_high | est=-7274.8530  SE=3313.8643  p=0.0288 **  N=14036 
+NOTE: 0/66 fixed-effect singletons were removed (66 observations).
+T6 working_hours (total_labor)    After:Treat (low) | est= +0.2688  SE=0.2261  p=0.2353   N=14036 
+T6 working_hours (total_labor)    After:Treat:prof_med | est= -0.1629  SE=0.2518  p=0.5182   N=14036 
+T6 working_hours (total_labor)    After:Treat:prof_high | est= -0.3005  SE=0.2425  p=0.2162   N=14036 
+
+================== Table 5: stack-level outcomes ==================
+NOTE: 0/9/4 fixed-effect singletons were removed (13 observations).
+T5 n_orders_per_stack (num_orders)  After:Treat (low) | est= +0.1836  SE=0.0505  p=0.0003 ***  N=153177 
+T5 n_orders_per_stack (num_orders)  After:Treat:prof_med | est= -0.0334  SE=0.0681  p=0.6240   N=153177 
+T5 n_orders_per_stack (num_orders)  After:Treat:prof_high | est= -0.0645  SE=0.1197  p=0.5903   N=153177 
+NOTE: 0/9/4 fixed-effect singletons were removed (13 observations).
+T5 stack_completion (total_duration) After:Treat (low) | est= +1.1524  SE=0.4368  p=0.0087 ***  N=153177 
+T5 stack_completion (total_duration) After:Treat:prof_med | est= -0.3521  SE=0.5964  p=0.5554   N=153177 
+T5 stack_completion (total_duration) After:Treat:prof_high | est= -0.6612  SE=0.9021  p=0.4641   N=153177 
+NOTE: 0/9/4 fixed-effect singletons were removed (13 observations).
+T5 time_per_order (avg_dur_orders)  After:Treat (low) | est= -0.3160  SE=0.1160  p=0.0068 ***  N=153177 
+T5 time_per_order (avg_dur_orders)  After:Treat:prof_med | est= +0.1918  SE=0.1318  p=0.1467   N=153177 
+T5 time_per_order (avg_dur_orders)  After:Treat:prof_high | est= +0.3554  SE=0.1196  p=0.0032 ***  N=153177 
+NOTES: 25,235 observations removed because of NA values (LHS: 25,235).
+       0/5/3 fixed-effect singletons were removed (8 observations).
+T5 idle_time (idle_btw_shifts)      After:Treat (low) | est= -0.1672  SE=0.2629  p=0.5252   N=127947 
+T5 idle_time (idle_btw_shifts)      After:Treat:prof_med | est= -0.2097  SE=0.3447  p=0.5433   N=127947 
+T5 idle_time (idle_btw_shifts)      After:Treat:prof_high | est= +0.1828  SE=0.3113  p=0.5574   N=127947 
+
+================== Table 7: customer waiting time ==================
+NOTE: 0/66 fixed-effect singletons were removed (66 observations).
+T7 day-overall avg_waiting                         | est= -0.0144  SE=0.1266  p=0.9092   N=14036 
+NOTES: 2,499 observations removed because of NA values (RHS: 2,499).
+       0/9/5 fixed-effect singletons were removed (14 observations).
+T7 shift-all avg_waiting                           | est= -0.0254  SE=0.0850  p=0.7656   N=150677 
+NOTES: 530 observations removed because of NA values (RHS: 530).
+       0/27/9 fixed-effect singletons were removed (36 observations).
+T7 shift-single avg_waiting                        | est= -0.1843  SE=0.0855  p=0.0319 **  N=74297 
+NOTES: 1,969 observations removed because of NA values (RHS: 1,969).
+       1/13/4 fixed-effect singletons were removed (17 observations).
+T7 shift-stacked avg_waiting                       | est= +0.0838  SE=0.0960  p=0.3835   N=76341 
+
+=== reproduction script done ===
