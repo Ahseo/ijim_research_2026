@@ -1,0 +1,57 @@
+
+========== TABLE 4 (Daily productivity) ==========
+PASS      T4 col1 After:Treat (DID)                          mine= +0.1406 (0.0471)  manuscript= +0.1410 (0.0470)  Δest=-0.0004  ΔSE=+0.0001
+[1] TRUE
+PASS      T4 col2 After:Treat:Low                            mine= +0.0884 (0.0715)  manuscript= +0.0880 (0.0710)  Δest=+0.0004  ΔSE=+0.0005
+[1] TRUE
+PASS      T4 col2 After:Treat:Med                            mine= +0.2493 (0.0661)  manuscript= +0.2490 (0.0660)  Δest=+0.0003  ΔSE=+0.0001
+[1] TRUE
+PASS      T4 col2 After:Treat:High                           mine= +0.0671 (0.0835)  manuscript= +0.0670 (0.0840)  Δest=+0.0001  ΔSE=-0.0005
+[1] TRUE
+
+========== TABLE 5 (Stack-level) ==========
+PASS      T5 c1 low (num_orders)                             mine= +0.1418 (0.0699)  manuscript= +0.1420 (0.0700)  Δest=-0.0002  ΔSE=-0.0001
+PASS      T5 c1 med (num_orders)                             mine= +0.1325 (0.0777)  manuscript= +0.1330 (0.0780)  Δest=-0.0005  ΔSE=-0.0003
+PASS      T5 c1 high (num_orders)                            mine= +0.1661 (0.1448)  manuscript= +0.1660 (0.1450)  Δest=+0.0001  ΔSE=-0.0002
+PASS      T5 c2 low (total_duration)                         mine= +1.0909 (0.5640)  manuscript= +1.0910 (0.5640)  Δest=-0.0001  ΔSE=+0.0000
+PASS      T5 c2 med (total_duration)                         mine= +0.5234 (0.6368)  manuscript= +0.5230 (0.6370)  Δest=+0.0004  ΔSE=-0.0002
+PASS      T5 c2 high (total_duration)                        mine= +0.8562 (1.0126)  manuscript= +0.8560 (1.0130)  Δest=+0.0002  ΔSE=-0.0004
+PASS      T5 c3 low (avg_duration_orders)                    mine= +0.0075 (0.1326)  manuscript= +0.0080 (0.1330)  Δest=-0.0005  ΔSE=-0.0004
+PASS      T5 c3 med (avg_duration_orders)                    mine= -0.2286 (0.0930)  manuscript= -0.2290 (0.0930)  Δest=+0.0004  ΔSE=-0.0000
+PASS      T5 c3 high (avg_duration_orders)                   mine= -0.0403 (0.0688)  manuscript= -0.0400 (0.0690)  Δest=-0.0003  ΔSE=-0.0002
+PASS      T5 c4 low (idle_btw_shifts)                        mine= +0.5656 (0.2864)  manuscript= +0.5660 (0.2860)  Δest=-0.0004  ΔSE=+0.0004
+PASS      T5 c4 med (idle_btw_shifts)                        mine= -0.5834 (0.2718)  manuscript= -0.5830 (0.2720)  Δest=-0.0004  ΔSE=-0.0002
+PASS      T5 c4 high (idle_btw_shifts)                       mine= -0.1459 (0.2213)  manuscript= -0.1460 (0.2210)  Δest=+0.0001  ΔSE=+0.0003
+
+========== TABLE 6 (Day-level) ==========
+MISMATCH  T6 c1 low (total_shift)                            mine= +0.3083 (0.4499)  manuscript= +0.3800 (0.4500)  Δest=-0.0717  ΔSE=-0.0001
+PASS      T6 c1 med (total_shift)                            mine= +0.2992 (0.4453)  manuscript= +0.2990 (0.4450)  Δest=+0.0002  ΔSE=+0.0003
+PASS      T6 c1 high (total_shift)                           mine= -0.5483 (0.3973)  manuscript= -0.5480 (0.3970)  Δest=-0.0003  ΔSE=+0.0003
+PASS      T6 c2 low (total_orders)                           mine= +2.0603 (0.9163)  manuscript= +2.0600 (0.9160)  Δest=+0.0003  ΔSE=+0.0003
+PASS      T6 c2 med (total_orders)                           mine= +2.0856 (1.0483)  manuscript= +2.0860 (1.0480)  Δest=-0.0004  ΔSE=+0.0003
+PASS      T6 c2 high (total_orders)                          mine= -0.1635 (1.2466)  manuscript= -0.1640 (1.2470)  Δest=+0.0005  ΔSE=-0.0004
+MISMATCH  T6 c3 low (total_fee)                              mine=+6100.9232 (2721.4361)  manuscript= +4.3840 (1.9560)  Δest=+6096.5392  ΔSE=+2719.4801
+MISMATCH  T6 c3 med (total_fee)                              mine=+6135.1009 (3153.1917)  manuscript= +4.4090 (2.2660)  Δest=+6130.6919  ΔSE=+3150.9257
+PASS      T6 c3 high (total_fee)                             mine=-284.7756 (3644.0378)  manuscript= -0.2050 (2.6190)  Δest=-284.5706  ΔSE=+3641.4188
+PASS      T6 c4 low (total_labor)                            mine= +0.4377 (0.2555)  manuscript= +0.4380 (0.2560)  Δest=-0.0003  ΔSE=-0.0005
+PASS      T6 c4 med (total_labor)                            mine= +0.0950 (0.2146)  manuscript= +0.0950 (0.2150)  Δest=+0.0000  ΔSE=-0.0004
+PASS      T6 c4 high (total_labor)                           mine= -0.1470 (0.1868)  manuscript= -0.1470 (0.1870)  Δest=-0.0000  ΔSE=-0.0002
+
+========== TABLE 7 (Customer waiting time) ==========
+PASS      T7 col1 DID all                                    mine= -0.0254 (0.0845)  manuscript= -0.0250 (0.0840)  Δest=-0.0004  ΔSE=+0.0005
+[1] TRUE
+PASS      T7 col2 DID single                                 mine= -0.1843 (0.0845)  manuscript= -0.1840 (0.0850)  Δest=-0.0003  ΔSE=-0.0005
+[1] TRUE
+PASS      T7 col3 DID stacked                                mine= +0.0838 (0.0949)  manuscript= +0.0840 (0.0950)  Δest=-0.0002  ΔSE=-0.0001
+[1] TRUE
+PASS      T7 col4 DDD all low                                mine= +0.0287 (0.1618)  manuscript= +0.0290 (0.1620)  Δest=-0.0003  ΔSE=-0.0002
+PASS      T7 col4 DDD all med                                mine= -0.1293 (0.1347)  manuscript= -0.1290 (0.1350)  Δest=-0.0003  ΔSE=-0.0003
+PASS      T7 col4 DDD all high                               mine= +0.0822 (0.1309)  manuscript= +0.0820 (0.1310)  Δest=+0.0002  ΔSE=-0.0001
+PASS      T7 col5 DDD single low                             mine= -0.0091 (0.1721)  manuscript= -0.0090 (0.1720)  Δest=-0.0001  ΔSE=+0.0001
+PASS      T7 col5 DDD single med                             mine= -0.2598 (0.1249)  manuscript= -0.2600 (0.1250)  Δest=+0.0002  ΔSE=-0.0001
+PASS      T7 col5 DDD single high                            mine= -0.1775 (0.1204)  manuscript= -0.1780 (0.1200)  Δest=+0.0005  ΔSE=+0.0004
+PASS      T7 col6 DDD stacked low                            mine= -0.0031 (0.2123)  manuscript= -0.0030 (0.2120)  Δest=-0.0001  ΔSE=+0.0003
+PASS      T7 col6 DDD stacked med                            mine= -0.0243 (0.1605)  manuscript= -0.0240 (0.1600)  Δest=-0.0003  ΔSE=+0.0005
+PASS      T7 col6 DDD stacked high                           mine= +0.2265 (0.1278)  manuscript= +0.2260 (0.1280)  Δest=+0.0005  ΔSE=-0.0002
+
+=== All-cell comparison done ===

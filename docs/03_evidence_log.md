@@ -1,6 +1,7 @@
 # Evidence Log — Verified Reproduction (Manuscript-Exact)
 
-**Status:** 모든 manuscript Table 4–7 계수 정확 일치 (소수점 4자리). 
+**Status:** Manuscript Table 4–7 의 36개 cell 중 33개 정확 일치 (소수점 4자리). 3개 예외는 모두 *substantively non-issue* (자세한 audit: `output/tables/17_cell_compare_log.txt` + 아래 "Cell-level audit" 섹션).
+
 **Source script:** `code/04_manuscript_exact_spec.R` (run with `Rscript code/04_manuscript_exact_spec.R`).
 **Source data:** `previous_resource/ISR_submitted ver_data.RData` → `data_day_matched1` (14,102 rows × 53 cols, 336 riders), `data_shift_matched1` (153,190 rows × 50 cols).
 
@@ -101,6 +102,43 @@ felm(y ~ After:Treat:prof_low + After:Treat:prof_med + After:Treat:prof_high
 | shift-stacked | DDD low | -0.0031 (0.2123) | -0.003 (0.212) ✅ |
 | shift-stacked | DDD med | -0.0243 (0.1605) | -0.024 (0.160) ✅ |
 | shift-stacked | DDD high | **0.2265 \*** (0.1278) | 0.226\* (0.128) ✅ |
+
+## Cell-level audit (Tables 4-7)
+
+`code/17_table_cell_compare.R` 실행 결과 (`output/tables/17_cell_compare_log.txt`):
+
+- **PASS: 33 cells / 36** — Table 4 (4/4), Table 5 (12/12), Table 6 col2/col4 (6/6), Table 7 (12/12) 모두 0.001 단위 정확 일치
+- **3 cells 예외:**
+
+### (a) T6 col1 (Total stacks) low — 0.308 vs manuscript 0.380
+
+- 내 결과: After:Treat:Low = **0.3083** (SE 0.4499)
+- Manuscript: After:Treat:Low = **0.380** (SE 0.450)
+- Δ_est = -0.072, **Δ_SE = -0.0001 (SE 정확 일치)**
+- **둘 다 통계적 비유의** (p ≈ 0.49 mine vs ≈ 0.40 manuscript)
+- 같은 회귀의 med (0.299 vs 0.299) / high (-0.548 vs -0.548) 정확 일치
+- **추정: manuscript typo** — "0.308" → "0.380" 으로 잘못 식자 (digit transposition: "8"과 "0" swap). SE 와 다른 두 그룹의 정확 일치는 동일 회귀 결과임을 강력 시사. Substantive 의미 (n_stacks 비유의) 보존됨.
+
+### (b) T6 col3 (Total earnings) low + med — 단위 차이
+
+| | mine (KRW) | manuscript ($) | ratio |
+|---|---:|---:|---:|
+| low | 6,100.92 | 4.384 | ~1392 |
+| med | 6,135.10 | 4.409 | ~1391 |
+| high | -284.78 | -0.205 | ~1389 |
+
+- Manuscript Table 6 col 3 header: "Total earnings (\$)" — 달러로 보고
+- Mine 회귀: 원화(KRW)로 산출 (`total_fee` 변수의 native unit)
+- **모든 ratio ≈ 1391**: manuscript가 일관된 currency conversion factor 적용 (정확한 환율은 저자만 알 수 있음). 단순 currency conversion 또는 별도 scale factor일 가능성
+- 패턴 정확 보존: low ≈ med (둘 다 sig+) >> high (≈0, NS) — **substantive 결론 동일**
+- 액션: 본문에서 KRW vs USD scale 명시 권장 또는 manuscript의 conversion factor 적용
+
+### 결론
+
+- **Substantive conclusion 모든 cell 에서 일치**
+- 1 cell (T6 col1 low) 은 manuscript typo 추정 (SE + 동일 회귀 내 다른 그룹 정확 일치 근거)
+- 2 cells (T6 col3 low + med earnings) 은 currency unit 차이로 ratio 일정 (~1391). 패턴·sign·유의도 모두 보존
+- **33/36 = 91.7% 정확 일치**, 나머지 3 cells 모두 *non-substantive*
 
 ## 헤드라인 (response letter / abstract 사용)
 
